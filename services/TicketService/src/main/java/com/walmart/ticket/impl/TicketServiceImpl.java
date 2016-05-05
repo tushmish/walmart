@@ -40,13 +40,17 @@ public class TicketServiceImpl implements TicketService {
   public Booking findAndHoldSeats(Set<Seat> seats, Optional<Integer> minLevel,
       Optional<Integer> maxLevel, String customerEmail) {
 
-    // insert a new booking
-    Booking booking = new Booking();
-    booking.setUsername(customerEmail);
-    booking.setStatus(Booking.BOOKING_STATUS.ON_HOLD.name());
-    booking.setCreatedOn(new Date());
-    booking.setSeats(seats);
-    bookingRepository.insert(booking);
+    Booking booking = null;
+    synchronized (this) {
+      // insert a new booking
+      booking = new Booking();
+      booking.setUsername(customerEmail);
+      booking.setStatus(Booking.BOOKING_STATUS.ON_HOLD.name());
+      booking.setCreatedOn(new Date());
+      booking.setSeats(seats);
+      bookingRepository.insert(booking);
+    }
+
     return booking;
   }
 
@@ -55,10 +59,14 @@ public class TicketServiceImpl implements TicketService {
   @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class,
       timeout = 300)
   public Booking reserveSeats(Booking booking, String customerEmail) {
-    booking.setUsername(customerEmail);
-    booking.setStatus(Booking.BOOKING_STATUS.RESERVED.name());
-    booking.setUpdatedOn(new Date());
-    return bookingRepository.update(booking);
+    Booking booked = null;
+    synchronized (this) {
+      booking.setUsername(customerEmail);
+      booking.setStatus(Booking.BOOKING_STATUS.RESERVED.name());
+      booking.setUpdatedOn(new Date());
+      booked = bookingRepository.update(booking);
+    }
+    return booked;
   }
 
 

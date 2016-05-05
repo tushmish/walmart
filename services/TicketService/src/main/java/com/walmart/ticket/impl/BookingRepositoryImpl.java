@@ -38,7 +38,7 @@ public class BookingRepositoryImpl<Booking> extends BaseDao implements BookingRe
   }
 
   @Override
-  public synchronized Booking update(final Booking booking) {
+  public Booking update(final Booking booking) {
     // TODO Auto-generated method stub
     return null;
   }
@@ -74,7 +74,7 @@ public class BookingRepositoryImpl<Booking> extends BaseDao implements BookingRe
   }
 
   @Override
-  public synchronized void insert(Booking booking) {
+  public void insert(Booking booking) {
     persist(booking);
   }
 
