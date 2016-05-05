@@ -16,6 +16,8 @@ public interface TicketService {
    */
   int numSeatsAvailable(Optional<Integer> venueLevel);
 
+  Set<Seat> findAvailableSeats(Optional<Integer> venueLevel);
+
   /**
    * Find and hold the best available seats for a customer.
    *
@@ -27,6 +29,8 @@ public interface TicketService {
    */
   Booking findAndHoldSeats(Set<Seat> seats, Optional<Integer> minLevel, Optional<Integer> maxLevel,
       String customerEmail);
+
+  Booking holdSeats(Set<Seat> seats, String customerEmail);
 
   /**
    * Commit seats held for a specific customer.
