@@ -74,7 +74,7 @@ public class BookingRepositoryImpl<Booking> extends BaseDao implements BookingRe
   }
 
   @Override
-  public void insert(Booking booking) {
+  public synchronized void insert(Booking booking) {
     persist(booking);
   }
 

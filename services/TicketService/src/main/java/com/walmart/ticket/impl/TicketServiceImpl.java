@@ -72,6 +72,18 @@ public class TicketServiceImpl implements TicketService {
     bookingRepository.insert(booking);
   }
 
+  @Override
+  public Set<Seat> findAvailableSeats(Optional<Integer> venueLevel) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Booking holdSeats(Set<Seat> seats, String customerEmail) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }
 
 
