@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.walmart.ticket.BookingRepository;
-import com.walmart.ticket.SeatRepository;
 import com.walmart.ticket.TicketService;
 import com.walmart.ticket.model.Booking;
 import com.walmart.ticket.model.Seat;
@@ -21,10 +20,20 @@ import com.walmart.ticket.model.Seat;
 public class TicketServiceImpl implements TicketService {
 
   @Autowired
-  private SeatRepository<Seat> seatRepository;
-
-  @Autowired
   private BookingRepository<Booking> bookingRepository;
+
+  /**
+   * Seats in the requested level that are neither held nor reserved.
+   *
+   * @param venueLevel
+   *          a numeric venue level identifier to limit the search
+   * @return the number of tickets available on the provided level
+   */
+  @Override
+  public Set<Seat> findAvailableSeats(Optional<Integer> venueLevel) {
+    // return bookingRepository.findAvailableSeats(venueLevel.get());
+    return null;
+  }
 
   @Override
   @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED,
@@ -33,13 +42,19 @@ public class TicketServiceImpl implements TicketService {
     return bookingRepository.findAvailableSeats(venueLevel.get());
   }
 
-  // TODO validate seat
+  /**
+   * Find and hold the best available seats for a customer.
+   *
+   * @param seats
+   *          the number of seats to find and hold
+   * @param customerEmail
+   *          unique identifier for the customer
+   * @return a SeatHold object identifying the specific seats and related information
+   */
   @Override
   @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class,
       timeout = 300)
-  public Booking findAndHoldSeats(Set<Seat> seats, Optional<Integer> minLevel,
-      Optional<Integer> maxLevel, String customerEmail) {
-
+  public Booking holdSeats(Set<Seat> seats, String customerEmail) {
     Booking booking = null;
     synchronized (this) {
       // insert a new booking
@@ -50,11 +65,18 @@ public class TicketServiceImpl implements TicketService {
       booking.setSeats(seats);
       bookingRepository.insert(booking);
     }
-
     return booking;
   }
 
-  // TODO validate seat
+  /**
+   * Commit seats held for a specific customer.
+   *
+   * @param booking
+   *          the seat hold identifier
+   * @param customerEmail
+   *          the email address of the customer to which the seat hold is assigned
+   * @return a reservation confirmation code
+   */
   @Override
   @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class,
       timeout = 300)
@@ -71,23 +93,15 @@ public class TicketServiceImpl implements TicketService {
 
 
 
-  // TODO delete
   @Override
-  @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class,
-      timeout = 300)
-  public void insert(Booking booking) {
-    seatRepository.insert(booking.getSeats());
-    bookingRepository.insert(booking);
-  }
-
-  @Override
-  public Set<Seat> findAvailableSeats(Optional<Integer> venueLevel) {
+  public Booking findAndHoldSeats(int numSeats, Optional<Integer> minLevel,
+      Optional<Integer> maxLevel, String customerEmail) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public Booking holdSeats(Set<Seat> seats, String customerEmail) {
+  public String reserveSeats(int seatHoldId, String customerEmail) {
     // TODO Auto-generated method stub
     return null;
   }

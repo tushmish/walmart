@@ -16,7 +16,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.walmart.ticket.config.AppConfig;
 import com.walmart.ticket.config.HibernateConfiguration;
-import com.walmart.ticket.impl.SeatRepositoryImpl;
 import com.walmart.ticket.impl.TicketServiceImpl;
 import com.walmart.ticket.model.Booking;
 import com.walmart.ticket.model.Booking.BOOKING_STATUS;
@@ -32,9 +31,6 @@ public class TicketServiceImplTest {
   /** road service. **/
   @Autowired
   private TicketServiceImpl ticketServiceImpl;
-
-  @Autowired
-  private SeatRepositoryImpl seatRepositoryImpl;
 
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {}
@@ -79,7 +75,7 @@ public class TicketServiceImplTest {
 
     try {
 
-      ticketServiceImpl.insert(booking);
+      // ticketServiceImpl.insert(booking);
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

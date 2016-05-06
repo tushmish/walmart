@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class BaseDao {
+public abstract class BaseRepository {
 
   @Autowired
   private SessionFactory sessionFactory;

@@ -11,7 +11,7 @@ import com.walmart.ticket.BookingRepository;
 import com.walmart.ticket.model.Seat;
 
 @Repository("bookingRepositoryImpl")
-public class BookingRepositoryImpl<Booking> extends BaseDao implements BookingRepository<Booking> {
+public class BookingRepositoryImpl<Booking> extends BaseRepository implements BookingRepository<Booking> {
 
   @Override
   public void insert(final Set<Booking> entities) {
