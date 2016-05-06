@@ -16,13 +16,13 @@ multiple shows / day
       - security (war)
       - user (war)
 
-booking - the overall application. 
-framework - contains modules representing cross cutting concers.
-common - contains reusable utility classes. Can be used in any module.
-exception - handles exception as a service.
-TicketService - the main application to book tickets.
-security - intented for API security. Can be implemented using spring ssecurity.
-user - module to store user information as a service.
+booking - the overall application.<br/>
+framework - contains modules representing cross cutting concers.<br/>
+common - contains reusable utility classes. Can be used in any module.<br/>
+exception - handles exception as a service.<br/>
+TicketService - the main application to book tickets.<br/>
+security - intented for API security. Can be implemented using spring ssecurity.<br/>
+user - module to store user information as a service.<br/>
 
 # Maven 
 Modules have been created as parent/child or injected as dependecies. Please refer to the respective POM files for details.
