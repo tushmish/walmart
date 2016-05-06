@@ -7,14 +7,14 @@ multiple shows / day
 
 # Project Structure
 
-booking
-   -framework
-      -common (jar)
-      -exception (jar)
-   -security
-      -TicketService (war)
-      -security (war)
-      -user (war)
+- booking
+   - framework
+      - common (jar)
+      - exception (jar)
+   - security
+      - TicketService (war)
+      - security (war)
+      - user (war)
 
 booking - the overall application. 
 framework - contains modules representing cross cutting concers.
