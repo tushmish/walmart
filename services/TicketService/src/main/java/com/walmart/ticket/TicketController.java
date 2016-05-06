@@ -81,10 +81,10 @@ public class TicketController {
    */
   @RequestMapping(value = "/shows/{name}/seats", method = RequestMethod.POST)
   public Object markSeatsOnHold(@PathVariable("name") final String name,
-      @RequestBody(required = true) Set<Seat> seats) {
+      @RequestBody(required = true) final Set<Seat> seats,
+      @RequestBody(required = true) final String email) {
 
-    String customerEmail = "";
-    Booking booking = service.holdSeats(seats, customerEmail);
+    final Booking booking = service.holdSeats(seats, email);
     final String userMessage =
         this.messageSource.getMessage("message.seats.hold.success", new Object[] {}, Locale.US);
 
@@ -104,10 +104,10 @@ public class TicketController {
    */
   @RequestMapping(value = "/shows/{name}/seats", method = RequestMethod.PUT)
   public Object reserveSeats(@PathVariable("name") final String name,
-      @RequestBody(required = true) Booking booking) {
+      @RequestBody(required = true) final Booking booking,
+      @RequestBody(required = true) final String email) {
 
-    String customerEmail = "";
-    Booking reserveSeats = service.reserveSeats(booking, customerEmail);
+    final Booking reserveSeats = service.reserveSeats(booking, email);
     final String userMessage =
         this.messageSource.getMessage("message.seats.reserved.success", new Object[] {}, Locale.US);
 

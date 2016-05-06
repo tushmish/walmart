@@ -29,7 +29,7 @@ public class AppConfig {
   @Bean(name = "messageSource")
   @Scope("singleton")
   public MessageSource createMessageSource() {
-    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+    final ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
     messageSource.setBasenames("i18n/user-messages", "i18n/error-messages");
     messageSource.setUseCodeAsDefaultMessage(true);
     messageSource.setDefaultEncoding("UTF-8");

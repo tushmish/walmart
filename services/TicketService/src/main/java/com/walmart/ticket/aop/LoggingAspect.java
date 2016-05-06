@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-public class LoggingAspectController {
+public class LoggingAspect {
 
   // -------- class variables ----------
 
   /** The Constant LOGGER. */
-  private static final Logger LOGGER = Logger.getLogger(LoggingAspectController.class);
+  private static final Logger LOGGER = Logger.getLogger(LoggingAspect.class);
 
   // -------- methods ------------------
 
@@ -32,7 +32,7 @@ public class LoggingAspectController {
    */
   @Before("within(today.road.user..*)")
   public void logBeforeExecution(final JoinPoint joinPoint) {
-    StringBuilder message = new StringBuilder();
+    final StringBuilder message = new StringBuilder();
     message.append("Before ");
     addMethodDetails(joinPoint, message);
     LOGGER.info(message.toString());
@@ -48,7 +48,7 @@ public class LoggingAspectController {
    */
   @After("within(today.road.user..*)")
   public void logAfterExecution(final JoinPoint joinPoint) {
-    StringBuilder message = new StringBuilder();
+    final StringBuilder message = new StringBuilder();
     message.append("After ");
     addMethodDetails(joinPoint, message);
     LOGGER.info(message.toString());
@@ -64,10 +64,10 @@ public class LoggingAspectController {
    * @param message
    *          logging message
    */
-  private void addMethodDetails(final JoinPoint joinPoint, StringBuilder message) {
+  private void addMethodDetails(final JoinPoint joinPoint, final StringBuilder message) {
     message.append("Class: " + joinPoint.getTarget().getClass().getSimpleName());
     message.append(", Method: " + joinPoint.getSignature().getName());
-    Object[] args = joinPoint.getArgs();
+    final Object[] args = joinPoint.getArgs();
     if (args != null && args.length > 0) {
       message.append(", Arguments: " + StringUtils.join(args, ","));
     }

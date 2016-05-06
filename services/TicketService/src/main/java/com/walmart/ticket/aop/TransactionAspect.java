@@ -26,7 +26,7 @@ public class TransactionAspect {
   // private ResponseGenerator responseGenerator;
 
   /**
-   * Validate, catch exception and generates response.
+   * Validates, catch exception and generates response.
    *
    * @param proceedingJoinPoint
    *          joinpoint to proceed the call.
@@ -45,6 +45,13 @@ public class TransactionAspect {
     return null;
   }
 
+  /**
+   * Validates, catch exception and generates response. e.g, timeout exception gets caught here.
+   *
+   * @param proceedingJoinPoint
+   *          joinpoint to proceed the call.
+   * @return return type of the method, if successful error, if there is an exception.
+   */
   @Around("execution(* com.walmart.ticket.impl..*TicketServiceImpl.holdSeats(..)) && args(customerEmail,..)")
   public Object validateCreate(final ProceedingJoinPoint proceedingJoinPoint,
       final String customerEmail) {
@@ -58,6 +65,13 @@ public class TransactionAspect {
     return null;
   }
 
+  /**
+   * Validates, catch exception and generates response.
+   *
+   * @param proceedingJoinPoint
+   *          joinpoint to proceed the call.
+   * @return return type of the method, if successful error, if there is an exception.
+   */
   @Around("execution(* com.walmart.ticket.impl..*TicketServiceImpl.reserveSeats(..)) && args(customerEmail,..)")
   public Object validateUUpdate(final ProceedingJoinPoint proceedingJoinPoint,
       final String customerEmail) {

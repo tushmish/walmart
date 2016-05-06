@@ -6,7 +6,11 @@ import java.util.Set;
 import com.walmart.ticket.model.Booking;
 import com.walmart.ticket.model.Seat;
 
-
+/**
+ * Base interface to handle requests to book tickets.
+ * 
+ * @author tushar
+ */
 public interface TicketService {
   /**
    * The number of seats in the requested level that are neither held nor reserved.

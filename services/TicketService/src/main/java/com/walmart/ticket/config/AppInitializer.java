@@ -28,18 +28,20 @@ public class AppInitializer implements WebApplicationInitializer {
   /**
    * initializes configurations on application startup.
    *
-   * @param servletContext servlet Context
-   * @throws ServletException exception.
+   * @param servletContext
+   *          servlet Context
+   * @throws ServletException
+   *           exception.
    */
   @Override
   public void onStartup(final ServletContext servletContext) throws ServletException {
     // Create the 'root' Spring application context
-    WebApplicationContext context = getContext();
+    final WebApplicationContext context = getContext();
     // Manage the lifecycle of the root application context
     servletContext.addListener(new ContextLoaderListener(context));
 
     // Create the dispatcher servlet's Spring application context
-    ServletRegistration.Dynamic dispatcher =
+    final ServletRegistration.Dynamic dispatcher =
         servletContext.addServlet("userDispatcherServlet", new DispatcherServlet(context));
     dispatcher.setLoadOnStartup(1);
     dispatcher.addMapping(MAPPING_URL);
@@ -51,7 +53,8 @@ public class AppInitializer implements WebApplicationInitializer {
    * @return AnnotationConfigWebApplicationContext
    */
   private AnnotationConfigWebApplicationContext getContext() {
-    AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+    final AnnotationConfigWebApplicationContext rootContext =
+        new AnnotationConfigWebApplicationContext();
     rootContext.setConfigLocations(new String[] {CONFIG_LOCATION});
     rootContext.register(AppConfig.class);
     return rootContext;

@@ -15,10 +15,14 @@ import com.walmart.ticket.TicketService;
 import com.walmart.ticket.model.Booking;
 import com.walmart.ticket.model.Seat;
 
+/**
+ * implementation class for ticket service .
+ */
 @Service("ticketServiceImpl")
 @Transactional
 public class TicketServiceImpl implements TicketService {
 
+  /** The booking repository. */
   @Autowired
   private BookingRepository<Booking> bookingRepository;
 
@@ -35,6 +39,11 @@ public class TicketServiceImpl implements TicketService {
     return null;
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.walmart.ticket.TicketService#numSeatsAvailable(java.util.Optional)
+   */
   @Override
   @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED,
       rollbackFor = Exception.class, readOnly = true)
@@ -93,6 +102,12 @@ public class TicketServiceImpl implements TicketService {
 
 
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.walmart.ticket.TicketService#findAndHoldSeats(int, java.util.Optional,
+   * java.util.Optional, java.lang.String)
+   */
   @Override
   public Booking findAndHoldSeats(int numSeats, Optional<Integer> minLevel,
       Optional<Integer> maxLevel, String customerEmail) {
@@ -100,6 +115,11 @@ public class TicketServiceImpl implements TicketService {
     return null;
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.walmart.ticket.TicketService#reserveSeats(int, java.lang.String)
+   */
   @Override
   public String reserveSeats(int seatHoldId, String customerEmail) {
     // TODO Auto-generated method stub

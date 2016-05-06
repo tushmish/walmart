@@ -33,14 +33,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @author tushar
  */
 
-
 @NamedNativeQueries({@NamedNativeQuery(name = "FIND_AVAILABLE_SEATS",
     query = "select level_id, row_id, column_id from seat s where s.id not in ( "
         + "select seat_id from booking_seat join booking on  booking.id = booking_seat.booking_id "
         + "join event on booking.event_id = event.id  "
-        + "where event.name = :eventName ) and s.level_id = :levelId;")})
-
-
+        + "where event.name = ? ) and s.level_id = ?",
+    resultClass = Booking.class)})
 
 @JsonInclude(Include.NON_DEFAULT)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -49,8 +47,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @Table(name = "BOOKING", schema = "WALMART")
 public class Booking extends BaseEntity implements Serializable {
 
+  /**
+   * booking status.
+   * 
+   * @author Kalpana
+   */
   public enum BOOKING_STATUS {
-    ON_HOLD, RESERVED
+    AVAILABLE, ON_HOLD, RESERVED
   };
 
   // -------- class variables ----------
@@ -102,7 +105,8 @@ public class Booking extends BaseEntity implements Serializable {
   /**
    * Sets the id.
    *
-   * @param id the new id
+   * @param id
+   *          the new id
    */
   public void setId(int id) {
     this.id = id;
@@ -120,7 +124,8 @@ public class Booking extends BaseEntity implements Serializable {
   /**
    * Sets the username.
    *
-   * @param username the new username
+   * @param username
+   *          the new username
    */
   public void setUsername(String username) {
     this.username = username;
@@ -138,7 +143,8 @@ public class Booking extends BaseEntity implements Serializable {
   /**
    * Sets the status.
    *
-   * @param status the new status
+   * @param status
+   *          the new status
    */
   public void setStatus(String status) {
     this.status = status;
