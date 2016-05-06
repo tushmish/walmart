@@ -2,8 +2,8 @@
 
 # Assumptions
 1. An additional, parameter is taken to add the show time. In this case, there is 1 show per day.
-2. Selecting the seats, puts them on hold. 
-multiple shows / day
+2. Seats can be chosen via UI and put on hold. 
+3. There can be multiple shows / day
 
 # Project Structure
 
