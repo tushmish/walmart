@@ -33,7 +33,7 @@ public class TicketController {
 
   // -------- class variables ----------
 
-  /** user service. **/
+  /** service. **/
   @Autowired
   private TicketService service;
 
@@ -61,13 +61,15 @@ public class TicketController {
       @RequestParam(value = "seatCategory", required = false,
           defaultValue = "") final int seatCategory) {
 
-    service.findAvailableSeats(Optional.ofNullable(seatCategory));
+    Set<Seat> availableSeats = service.findAvailableSeats(Optional.ofNullable(seatCategory));
+
+    // log
     final String userMessage =
         this.messageSource.getMessage("message.seats.find.success", new Object[] {}, Locale.US);
 
     final HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.setContentType(MediaType.APPLICATION_JSON);
-    return new ResponseEntity<String>(userMessage, responseHeaders, HttpStatus.OK);
+    return new ResponseEntity<Set<Seat>>(availableSeats, responseHeaders, HttpStatus.OK);
   }
 
   /**

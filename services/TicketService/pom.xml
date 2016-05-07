@@ -170,16 +170,16 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>walmart</groupId>
-			<artifactId>exception</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>walmart</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>walmart</groupId> -->
+<!-- 			<artifactId>exception</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>walmart</groupId> -->
+<!-- 			<artifactId>common</artifactId> -->
+<!-- 			<version>0.0.1-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
 
 		<!-- Logging -->
 		<dependency>
