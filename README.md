@@ -24,6 +24,8 @@ TicketService - the main application to book tickets.<br/>
 security - intented for API security. Can be implemented using spring ssecurity.<br/>
 user - module to store user information as a service.<br/>
 
+Note: The service modules user and security are empty to demostrate the projects as a service. Similary, the framework components - exception , common, indicate their presence as reusable components across all services. Overall, it indicates the project structure.
+
 # Maven 
 Modules have been created as parent/child or injected as dependecies. Please refer to the respective POM files for details.
 
